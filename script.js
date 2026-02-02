@@ -1,32 +1,41 @@
 let firstNumberElement = document.getElementById("firstNumber");
 let secondNumberElement = document.getElementById("secondNumber");
-let userinputElement = document.getElementById("userInput");
+let userInputElement = document.getElementById("userInput");
 let gameResultElement = document.getElementById("gameResult");
-let total = parseInt(firstNumberElement) + parseInt(secondNumberElement)
 
 function checkButton() {
     let firstRandomNumber = parseInt(firstNumberElement.textContent);
-    let secndrRandomNumber = parseInt(secondNumberElement.textContent);
-    let userValue = parseInt(userinputElement.value);
-    let total = firstRandomNumber + secndrRandomNumber;
-    if (userValue === total) {
-        gameResultElement.textContent = "Congratulations! You got it right.";
-        gameResultElement.style.backgroundColor = '#028a0f';
-    } else {
-        gameResultElement.textContent = "Please Try Again!";
-        gameResultElement.style.backgroundColor = '#1e217c';
+    let secondRandomNumber = parseInt(secondNumberElement.textContent);
+    let userValue = parseInt(userInputElement.value);
+
+    if (isNaN(userValue)) {
+        gameResultElement.textContent = "Please enter a number!";
+        gameResultElement.style.backgroundColor = "#f59e0b";
+        return;
     }
 
+    let total = firstRandomNumber + secondRandomNumber;
+
+    if (userValue === total) {
+        gameResultElement.textContent = " Congratulations! You got it right.";
+        gameResultElement.style.backgroundColor = "#028a0f";
+    } else {
+        gameResultElement.textContent = " Please Try Again!";
+        gameResultElement.style.backgroundColor = "#1e217c";
+    }
 }
 
 function restartGame() {
     let firstRandomNumber = Math.ceil(Math.random() * 100);
-    firstNumberElement.textContent = firstRandomNumber;
-
     let secondRandomNumber = Math.ceil(Math.random() * 100);
+
+    firstNumberElement.textContent = firstRandomNumber;
     secondNumberElement.textContent = secondRandomNumber;
 
+    userInputElement.value = "";
     gameResultElement.textContent = "";
-    userinputElement.value = "";
+    gameResultElement.style.backgroundColor = "";
 }
+
+// Start the game on load
 restartGame();
